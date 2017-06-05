@@ -1,4 +1,4 @@
-from tables3 import __version__
+from tables3_api import __version__
 
 from setuptools import setup
 
@@ -7,13 +7,13 @@ try:
 except ImportError:
     cmdclass = {}
 
-setup(name='tables3',
+setup(name='tables3_api',
       author='Jean Connelly, Tom Aldcroft',
       description='pytables 2 to 3 compatibility methods',
       author_email='jconnelly@cfa.harvard.edu',
       version=__version__,
       zip_safe=False,
-      packages=['tables3', 'tables3.tests'],
+      packages=['tables3_api', 'tables3_api.tests'],
       tests_require=['pytest'],
       cmdclass=cmdclass,
       )
