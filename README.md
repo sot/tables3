@@ -18,4 +18,33 @@ So the update process for a package is then to:
 * Check in changes.
 * Test in pytables2 and pytables3 environments.
 
+To put this in context, if you had code that looked like this
+```
+import tables
+def read_table(file):
+    h5 = tables.openFile(file)  # openFile is pytables2 old method name
+    return h5.root.data[:]
+```
+after running pt2to3_all, the file would look like this
+```
+import tables
+def read_table(file):
+    h5 = tables.open_file(file)  # new pytables3 API 
+    return h5.root.data[:]
+```
+and the user should edit it to add the "import tables3_api" line:
+```
+import tables
+import tables3_api
+def read_table(file):
+    h5 = tables.open_file(file)
+    return h5.root.data[:]
+```
+
+Now, if the code is called from an environment with pytables3, tables.open_file is the correct name for that method and it just works.  If the code is called from an environment with pytables2, the "import tables3_api" method did this assignment behind the scenes:
+```
+tables.open_file = tables.openFile
+```
+so the native pytables2 method to open the file has been aliased to "open_file" so the code will run fine then as well.
+
 
