@@ -1,0 +1,6 @@
+#!/bin/bash
+for f in $(find . -name '*.py')
+do
+    echo $f
+    pt2to3 -i $f
+done
