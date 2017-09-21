@@ -1,3 +1,4 @@
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
 from tables3_api import __version__
 
 from setuptools import setup
